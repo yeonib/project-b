@@ -1,0 +1,41 @@
+
+// 메인 이름 키프레임
+
+@keyframes drawText {
+  to {
+    stroke-dashoffset: 0;
+  }
+} 
+
+
+/* 키프레임은 그대로 사용 */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+button {
+  border:0;
+  background: none;
+}
+
+p, span, button, ul, li, a {
+  white-space: pre-line;
+}
+
+h2 {
+  font-size: 2.604vw; /*50px*/
+}

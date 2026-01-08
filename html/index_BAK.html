@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Embraced Style – Final</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f2;
+  color: #111;
+  overflow: hidden;
+}
+
+/* ================= HEADER ================= */
+.header {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  z-index: 99;
+  pointer-events: none;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  position: fixed;
+  bottom: 20px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #666;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ================= MAIN ================= */
+.main {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1000px 1fr;
+  align-items: center;
+}
+
+/* ================= VIEWPORT ================= */
+.viewport {
+  height: 100vh;
+  overflow: hidden;
+  perspective: 2600px;
+}
+
+/* ================= TRACK ================= */
+.track {
+  will-change: transform;
+}
+
+/* ================= PROJECT ================= */
+.project {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* IMAGE */
+.project img {
+  width: 520px;
+  height: 520px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+/* TEXT OVER IMAGE */
+.project-info {
+  position: absolute;
+  left: 420px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* BIG TEXT */
+.project-info h1 {
+  font-size: 160px;
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -4px;
+  color: #111;
+}
+
+/* ================= FIXED SMALL TEXT ================= */
+.fixed-caption {
+  position: fixed;
+  left: 50%;
+  top: 66%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* ================= RIGHT SCROLLER ================= */
+.scroll-indicator-wrapper {
+  position: fixed;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.scroll-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #cfcfcf;
+  border-radius: 50%;
+}
+
+.scroll-rotator {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+
+.scroll-dot {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #111;
+  border-radius: 50%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>DE2®<br>K24</div>
+  <div>AVAILABLE FOR FREELANCE<br>designembraced@gmail.com</div>
+  <div>WEB DESIGN UI UX<br>BRANDING / MOTION</div>
+  <div>SOCIAL<br>TW DR LI</div>
+</div>
+
+<div class="fixed-caption" id="fixedCaption"></div>
+
+<!-- RIGHT SCROLLER -->
+<div class="scroll-indicator-wrapper">
+  <div class="scroll-ring"></div>
+  <div class="scroll-rotator" id="rotator">
+    <div class="scroll-dot"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div></div>
+
+  <div class="viewport">
+    <div class="track" id="track">
+
+      <div class="project" data-caption="Project One">
+        <img src="../assets/images/bg1.jpg">
+        <div class="project-info"><h1>PR.01<br>/07</h1></div>
+      </div>
+
+      <div class="project" data-caption="Project Two">
+        <img src="../assets/images/bg2.jpg">
+        <div class="project-info"><h1>PR.02<br>/07</h1></div>
+      </div>
+
+      <div class="project" data-caption="Project Three">
+        <img src="../assets/images/bg3.jpg">
+        <div class="project-info"><h1>PR.03<br>/07</h1></div>
+      </div>
+
+      <div class="project" data-caption="Project Four">
+        <img src="../assets/images/bg4.jpg">
+        <div class="project-info"><h1>PR.04<br>/07</h1></div>
+      </div>
+
+      <div class="project" data-caption="Project Five">
+        <img src="../assets/images/bg5.jpg">
+        <div class="project-info"><h1>PR.05<br>/07</h1></div>
+      </div>
+
+      <div class="project" data-caption="Project Six">
+        <img src="../assets/images/bg1.jpg">
+        <div class="project-info"><h1>PR.06<br>/07</h1></div>
+      </div>
+
+      <div class="project" data-caption="Project Seven">
+        <img src="../assets/images/bg2.jpg">
+        <div class="project-info"><h1>PR.07<br>/07</h1></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>© DESIGN EMBRACED LTD</div>
+  <div>C-NR. 07186749</div>
+</div>
+
+<script>
+const track = document.getElementById('track');
+let sections = Array.from(document.querySelectorAll('.project'));
+const rotator = document.getElementById('rotator');
+const caption = document.getElementById('fixedCaption');
+
+const SECTION_HEIGHT = window.innerHeight * 0.7;
+const COUNT = sections.length;
+
+/* CLONE */
+sections.forEach(s => track.appendChild(s.cloneNode(true)));
+sections.forEach(s => track.appendChild(s.cloneNode(true)));
+sections = Array.from(document.querySelectorAll('.project'));
+
+let currentY = SECTION_HEIGHT * COUNT;
+let targetY = currentY;
+
+/* WHEEL */
+window.addEventListener('wheel', e => {
+  targetY += e.deltaY * 0.85;
+});
+
+/* LOOP */
+function animate() {
+  const ease = 0.085;
+  currentY += (targetY - currentY) * ease;
+
+  track.style.transform = `translateY(${-currentY}px)`;
+
+  applyCurve();
+  applyMagnet();
+  updateCaption();
+  updateIndicator();
+
+  requestAnimationFrame(animate);
+}
+
+/* CURVE (opacity 제거) */
+function applyCurve() {
+  const centerY = window.innerHeight / 2;
+
+  const ARC_RADIUS = window.innerHeight * 0.9; // 반원 반지름
+  const ARC_WIDTH  = 320;
+  const ARC_DEPTH  = 700;
+
+  sections.forEach((section, i) => {
+    const sectionCenterY = i * SECTION_HEIGHT + SECTION_HEIGHT / 2;
+
+    // 🔑 연속적인 각도 (절대 clamp 하지 않음)
+    const dy = sectionCenterY - currentY - centerY;
+    const angle = dy / ARC_RADIUS;
+
+    const x = Math.sin(angle) * ARC_WIDTH;
+    const z = -Math.cos(angle) * ARC_DEPTH;
+
+    section.style.transform = `
+      translate3d(${x}px, 0px, ${z}px)
+    `;
+  });
+}
+
+/* MAGNET */
+function applyMagnet() {
+  const center = window.innerHeight / 2;
+
+  const SNAP_RANGE = SECTION_HEIGHT * 0.25;
+  const MAX_FORCE = 0.07;
+
+  let closest = Infinity;
+
+  sections.forEach((section, i) => {
+    const sectionCenter = i * SECTION_HEIGHT + SECTION_HEIGHT / 2;
+    const distance = sectionCenter - currentY - center;
+    const abs = Math.abs(distance);
+
+    if (abs < SNAP_RANGE && abs < closest) {
+      closest = abs;
+      const t = abs / SNAP_RANGE;
+      const force = (1 - t) * MAX_FORCE;
+      targetY += distance * force;
+    }
+  });
+
+  const total = SECTION_HEIGHT * COUNT;
+  if (currentY < total) {
+    currentY += total;
+    targetY += total;
+  }
+  if (currentY > total * 2) {
+    currentY -= total;
+    targetY -= total;
+  }
+}
+
+/* FIXED CAPTION */
+function updateCaption() {
+  const center = window.innerHeight / 2;
+  let active = null;
+
+  sections.forEach((section, i) => {
+    const sectionCenter = i * SECTION_HEIGHT + SECTION_HEIGHT / 2;
+    const distance = Math.abs(sectionCenter - currentY - center);
+    if (distance < SECTION_HEIGHT * 0.18) active = section;
+  });
+
+  if (active) {
+    caption.textContent = active.dataset.caption;
+    caption.style.opacity = 1;
+  } else {
+    caption.style.opacity = 0;
+  }
+}
+
+/* INDICATOR */
+function updateIndicator() {
+  const progress = (currentY % (SECTION_HEIGHT * COUNT)) / (SECTION_HEIGHT * COUNT);
+  rotator.style.transform = `rotate(${progress * 360 - 90}deg)`;
+}
+
+animate();
+</script>
+
+</body>
+</html>
