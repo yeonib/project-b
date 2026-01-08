@@ -3356,6 +3356,7 @@ p {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  border-radius: .5rem;
 }
 
 .is-muted-60 {
@@ -3417,10 +3418,11 @@ p {
 
 .about-hero-image-mask {
   object-fit: cover;
+  object-position: center top;
   border-radius: .5rem;
   justify-content: center;
   align-items: center;
-  height: 40.625rem;
+  height: 38.5vw;
   display: flex;
   overflow: hidden;
 }
@@ -3428,7 +3430,7 @@ p {
 .about-hero-image-mask.small {
   justify-content: center;
   align-items: center;
-  height: 28.75rem;
+  height: 33vw;
 }
 
 .padding-section-160 {
