@@ -2867,6 +2867,7 @@ p {
   font-size: 1.5em;
   font-weight: 400;
   line-height: 1.3;
+  margin: 0;
 }
 
 .heading-style-h5.is-white {
@@ -3779,28 +3780,74 @@ p {
 }
 
 /*test*/
-/* 가로 드래그 영역 */
-.horizontal-drag-wrap {
-  overflow: hidden;
-  cursor: grab;
-}
+/* 드래그 슬라이드 컨테이너 */
 
-.horizontal-drag-wrap.is-dragging {
+/* =========================
+   가로 리스트
+========================= */
+.cs-collection-list {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.cs-collection-list::-webkit-scrollbar {
+  display: none;
+}
+.cs-collection-list.is-dragging {
   cursor: grabbing;
 }
-
-/* 실제 가로로 움직일 리스트 */
-.cs-collection-list.w-dyn-items {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 32px; /* 카드 간격 */
-  will-change: transform;
-}
-
-/* 카드 고정 폭 */
 .cs-collection-item {
   flex: 0 0 auto;
+  width: 320px;
+  user-select: none;
 }
+.img-cs-card {
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+}
+.cs-collection-list.is-dragging .img-cs-card {
+  pointer-events: none;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+.modal__dark {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+}
+.modal,
+.modal__dark {
+  overscroll-behavior: none;
+}
+
+/* .cs-collection-list.is-dragging a {
+  pointer-events: none;
+} */
+
+.cs-collection-list.w-dyn-items {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 32px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 아이템 줄바꿈 방지 */
+.cs-collection-item.w-dyn-item {
+  flex: 0 0 auto !important;
+  width: 420px; /* 테스트용, 나중에 조절 */
+}
+/* 드래그 슬라이드 컨테이너 //*/
 
 .service-pin-height {
   width: 100%;
@@ -4543,7 +4590,7 @@ p {
   pointer-events: auto;
   border-radius: 2em;
   width: 100%;
-  max-width: 56em;
+  max-width: 100%;
   max-height: 100%;
   padding: .75em;
   position: relative;
@@ -4563,7 +4610,7 @@ p {
   left: 0;
 }
 
-.modal__scroll {
+/* .modal__scroll {
   grid-column-gap: 1.5em;
   grid-row-gap: 1.5em;
   border-radius: 1.25em;
@@ -4573,7 +4620,7 @@ p {
   display: flex;
   position: relative;
   overflow: scroll;
-}
+} */
 
 .modal__btn-close-bar {
   color: var(--colour--white);
@@ -4699,7 +4746,8 @@ p {
 
 ._w-cs-heading {
   justify-content: space-between;
-  align-items: flex-end;
+  /* align-items: flex-end; */
+  align-items: center;
   padding-right: .5em;
   display: flex;
 }
