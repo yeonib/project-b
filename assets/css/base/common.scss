@@ -50,6 +50,9 @@ audio:not([controls]) {
   display: none;
 }
 
+ul, li {
+  list-style: none;
+}
 a {
   background-color: #0000;
 }
