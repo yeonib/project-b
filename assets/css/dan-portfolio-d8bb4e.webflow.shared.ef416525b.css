@@ -5759,9 +5759,9 @@ p {
     overflow-y: auto;
   }
   /* 가로 슬라이더 전용 */
-  .cs-collection-list {
+  /* .cs-collection-list {
     touch-action: pan-x;
-  }
+  } */
   /* body.is-loading {
   overflow: hidden;
   touch-action: none;
