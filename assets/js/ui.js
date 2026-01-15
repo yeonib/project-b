@@ -6,29 +6,11 @@ function isMobile() {
 }
 
 /* ======================
-   PREVENT SCROLL (INPUT LEVEL)
-====================== */
-function preventScroll(e) {
-  e.preventDefault();
-}
-
-function enableLoadScrollLock() {
-  document.addEventListener('touchmove', preventScroll, { passive: false });
-  document.addEventListener('wheel', preventScroll, { passive: false });
-}
-
-function disableLoadScrollLock() {
-  document.removeEventListener('touchmove', preventScroll);
-  document.removeEventListener('wheel', preventScroll);
-}
-
-/* ======================
-   LOAD LOCK (모바일만)
+   LOAD LOCK (CSS ONLY)
    ⚠️ DOMContentLoaded 이전
 ====================== */
 if (isMobile()) {
   document.body.classList.add('is-loading');
-  enableLoadScrollLock();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ======================
      SCROLL LOCK UTILS
-     (MODAL / MENU용)
+     (MODAL 전용)
   ====================== */
 
   function lockScroll() {
@@ -152,12 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
    LOAD COMPLETE
 ====================== */
 window.addEventListener('load', () => {
-  if (isMobile()) {
-    document.body.classList.remove('is-loading');
-    disableLoadScrollLock(); // ⭐ 여기서 입력 차단 해제
-  }
+  document.body.classList.remove('is-loading');
 
-  /* 🔒 padding-right 최종 안전장치 */
+  /* padding-right 안전장치 */
   document.documentElement.style.paddingRight = '0px';
   document.body.style.paddingRight = '0px';
 });
