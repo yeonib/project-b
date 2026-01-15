@@ -5751,13 +5751,16 @@ p {
 }
 
 @media screen and (max-width: 991px) {
-   html, body {
-    overflow-y: auto !important;
-    touch-action: pan-y !important;
+  html {
+    overflow-x: hidden;
   }
-  body.is-scroll-locked {
-    position: fixed;
-    width: 100%;
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  /* 가로 슬라이더 전용 */
+  .cs-collection-list {
+    touch-action: pan-x;
   }
   /* body.is-loading {
   overflow: hidden;
