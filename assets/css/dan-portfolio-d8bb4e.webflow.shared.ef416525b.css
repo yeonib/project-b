@@ -5374,6 +5374,19 @@ p {
 }
 
 @media screen and (max-width: 767px) {
+  html {
+  overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cs-collection-list {
+    touch-action: pan-x;
+  }
   .w-nav[data-collapse="small"] .w-nav-menu {
     display: none;
   }
@@ -5713,6 +5726,7 @@ p {
 }
 
 @media (min-width: 768px) {
+
   .w-lightbox-content {
     height: 96vh;
     margin-top: 2vh;
@@ -5751,32 +5765,7 @@ p {
 }
 
 @media screen and (max-width: 991px) {
-  html {
-    overflow-x: hidden;
-  }
-  body {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  /* 가로 슬라이더 전용 */
-  /* .cs-collection-list {
-    touch-action: pan-x;
-  } */
-  /* body.is-loading {
-  overflow: hidden;
-  touch-action: none;
-  }
-
-  body.is-scroll-locked {
-    position: fixed;
-    width: 100%;
-    overflow: hidden;
-  }
-  html,
-  body {
-    padding-right: 0 !important;
-    overflow: hidden;
-  } */
+ 
   .w-nav[data-collapse="medium"] .w-nav-menu {
     display: none;
   }

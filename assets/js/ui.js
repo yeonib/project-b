@@ -7,14 +7,13 @@ function isMobile() {
 
 /* ======================
    LOAD LOCK (CSS ONLY)
-   ⚠️ DOMContentLoaded 이전
 ====================== */
 if (isMobile()) {
   document.body.classList.add('is-loading');
 }
 
 /* ======================
-   🔒 FORCE UNLOCK (모바일 핵심)
+   FORCE UNLOCK (모바일 복구)
 ====================== */
 function forceUnlockScroll() {
   document.body.classList.remove('is-loading', 'is-scroll-locked');
@@ -24,7 +23,6 @@ function forceUnlockScroll() {
   document.body.style.touchAction = '';
 }
 
-/* load + pageshow (모바일 실기기 필수) */
 window.addEventListener('load', forceUnlockScroll);
 window.addEventListener('pageshow', forceUnlockScroll);
 
@@ -94,6 +92,39 @@ document.addEventListener('DOMContentLoaded', () => {
     isDown = false;
     slider.classList.remove('is-dragging');
     setTimeout(() => (isDragging = false), 0);
+  });
+
+  /* ======================
+     ✅ TOUCH SCROLL FIX (MOBILE 핵심)
+     가로 스와이프 후 세로 스크롤 안 되는 문제 해결
+  ====================== */
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isHorizontalTouch = false;
+
+  slider.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    isHorizontalTouch = false;
+  }, { passive: true });
+
+  slider.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    const diffX = Math.abs(t.clientX - touchStartX);
+    const diffY = Math.abs(t.clientY - touchStartY);
+
+    // 가로 제스처일 때만 슬라이더가 이벤트를 가짐
+    if (diffX > diffY && diffX > 6) {
+      isHorizontalTouch = true;
+      e.preventDefault(); // 여기서만 막음
+    }
+    // 세로 제스처면 아무 것도 하지 않음 → 페이지 스크롤로 전달
+  }, { passive: false });
+
+  slider.addEventListener('touchend', () => {
+    isHorizontalTouch = false;
   });
 
   /* ======================
