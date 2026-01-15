@@ -6,14 +6,25 @@ function isMobile() {
 }
 
 /* ======================
-   LOAD LOCK (CSS ONLY)
+   PC INTRO SCROLL BLOCK
 ====================== */
-if (isMobile()) {
-  document.body.classList.add('is-loading');
+function blockPcScroll(e) {
+  e.preventDefault();
 }
 
 /* ======================
-   FORCE UNLOCK (모바일 복구)
+   LOAD LOCK (PC ONLY)
+====================== */
+if (!isMobile()) {
+  document.body.classList.add('is-loading');
+
+  // PC 인트로 동안 스크롤 입력 완전 차단
+  window.addEventListener('wheel', blockPcScroll, { passive: false });
+  window.addEventListener('keydown', blockPcScroll, { passive: false });
+}
+
+/* ======================
+   FORCE UNLOCK
 ====================== */
 function forceUnlockScroll() {
   document.body.classList.remove('is-loading', 'is-scroll-locked');
@@ -21,10 +32,21 @@ function forceUnlockScroll() {
   document.body.style.top = '';
   document.body.style.overflow = '';
   document.body.style.touchAction = '';
+
+  // PC 스크롤 차단 해제
+  window.removeEventListener('wheel', blockPcScroll);
+  window.removeEventListener('keydown', blockPcScroll);
 }
 
+/* PC: load에서만 해제 */
 window.addEventListener('load', forceUnlockScroll);
-window.addEventListener('pageshow', forceUnlockScroll);
+
+/* 모바일: pageshow 복구 필요 */
+window.addEventListener('pageshow', () => {
+  if (isMobile()) {
+    forceUnlockScroll();
+  }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -39,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ======================
      SCROLL LOCK UTILS
-     (MODAL 전용)
+     (MODAL 전용 / 모바일)
   ====================== */
 
   function lockScroll() {
@@ -95,19 +117,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ======================
-     ✅ TOUCH SCROLL FIX (MOBILE 핵심)
-     가로 스와이프 후 세로 스크롤 안 되는 문제 해결
+     TOUCH SCROLL FIX (MOBILE)
+     가로 → 세로 전환 후 스크롤 멈춤 방지
   ====================== */
 
   let touchStartX = 0;
   let touchStartY = 0;
-  let isHorizontalTouch = false;
 
   slider.addEventListener('touchstart', e => {
     const t = e.touches[0];
     touchStartX = t.clientX;
     touchStartY = t.clientY;
-    isHorizontalTouch = false;
   }, { passive: true });
 
   slider.addEventListener('touchmove', e => {
@@ -115,17 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const diffX = Math.abs(t.clientX - touchStartX);
     const diffY = Math.abs(t.clientY - touchStartY);
 
-    // 가로 제스처일 때만 슬라이더가 이벤트를 가짐
     if (diffX > diffY && diffX > 6) {
-      isHorizontalTouch = true;
-      e.preventDefault(); // 여기서만 막음
+      e.preventDefault(); // 가로 제스처일 때만 슬라이더가 제어
     }
-    // 세로 제스처면 아무 것도 하지 않음 → 페이지 스크롤로 전달
+    // 세로 제스처는 그대로 페이지 스크롤
   }, { passive: false });
-
-  slider.addEventListener('touchend', () => {
-    isHorizontalTouch = false;
-  });
 
   /* ======================
      MODAL OPEN
