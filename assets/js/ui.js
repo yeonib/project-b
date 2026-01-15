@@ -13,6 +13,21 @@ if (isMobile()) {
   document.body.classList.add('is-loading');
 }
 
+/* ======================
+   🔒 FORCE UNLOCK (모바일 핵심)
+====================== */
+function forceUnlockScroll() {
+  document.body.classList.remove('is-loading', 'is-scroll-locked');
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.overflow = '';
+  document.body.style.touchAction = '';
+}
+
+/* load + pageshow (모바일 실기기 필수) */
+window.addEventListener('load', forceUnlockScroll);
+window.addEventListener('pageshow', forceUnlockScroll);
+
 document.addEventListener('DOMContentLoaded', () => {
 
   const slider = document.querySelector('.cs-collection-list');
@@ -46,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ======================
-     DRAG SCROLL
+     DRAG SCROLL (PC)
   ====================== */
 
   slider.addEventListener('dragstart', e => {
@@ -128,15 +143,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-});
-
-/* ======================
-   LOAD COMPLETE
-====================== */
-window.addEventListener('load', () => {
-  document.body.classList.remove('is-loading');
-
-  /* padding-right 안전장치 */
-  document.documentElement.style.paddingRight = '0px';
-  document.body.style.paddingRight = '0px';
 });

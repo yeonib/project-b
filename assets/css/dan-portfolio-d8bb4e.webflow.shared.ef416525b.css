@@ -5751,6 +5751,14 @@ p {
 }
 
 @media screen and (max-width: 991px) {
+   html, body {
+    overflow-y: auto !important;
+    touch-action: pan-y !important;
+  }
+  body.is-scroll-locked {
+    position: fixed;
+    width: 100%;
+  }
   /* body.is-loading {
   overflow: hidden;
   touch-action: none;
