@@ -5751,7 +5751,7 @@ p {
 }
 
 @media screen and (max-width: 991px) {
-  body.is-loading {
+  /* body.is-loading {
   overflow: hidden;
   touch-action: none;
   }
@@ -5765,7 +5765,7 @@ p {
   body {
     padding-right: 0 !important;
     overflow: hidden;
-  }
+  } */
   .w-nav[data-collapse="medium"] .w-nav-menu {
     display: none;
   }
