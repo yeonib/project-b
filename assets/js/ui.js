@@ -122,55 +122,155 @@ document.addEventListener('DOMContentLoaded', () => {
   ====================== */
 
   let touchStartX = 0;
-  let touchStartY = 0;
+let touchStartY = 0;
+let touchDirection = null;
 
-  slider.addEventListener('touchstart', e => {
-    const t = e.touches[0];
-    touchStartX = t.clientX;
-    touchStartY = t.clientY;
-  }, { passive: true });
+slider.addEventListener('touchstart', e => {
+  const t = e.touches[0];
+  touchStartX = t.clientX;
+  touchStartY = t.clientY;
+  touchDirection = null;
+}, { passive: true });
 
-  // slider.addEventListener('touchmove', e => {
-  //   const t = e.touches[0];
-  //   const diffX = Math.abs(t.clientX - touchStartX);
-  //   const diffY = Math.abs(t.clientY - touchStartY);
+slider.addEventListener('touchmove', e => {
+  const t = e.touches[0];
 
-  //   if (diffX > diffY && diffX > 6) {
-  //     e.preventDefault(); 
-  //   }
-  // }, { passive: false });
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
 
-  /* ======================
-     MODAL OPEN
-  ====================== */
+  // 일정 거리 이상 움직였을 때만 방향 결정
+  if (!touchDirection) {
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+      touchDirection =
+        Math.abs(dx) > Math.abs(dy)
+          ? 'horizontal'
+          : 'vertical';
+    }
+  }
 
-  document.querySelectorAll('.lnk-modal').forEach(link => {
-    link.addEventListener('click', e => {
+  // if (touchDirection === 'horizontal') {
+  //   e.preventDefault();
+  // }
+}, { passive: false });
+/* ======================
+   MODAL OPEN
+====================== */
 
-      if (isDragging) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        return;
-      }
+// document.querySelectorAll('.lnk-modal').forEach(link => {
+//   link.addEventListener('click', e => {
 
-      e.preventDefault();
+//     if (isDragging) {
+//       e.preventDefault();
+//       e.stopImmediatePropagation();
+//       return;
+//     }
 
-      const item = e.currentTarget.closest('.cs-collection-item');
-      if (!item) return;
+//     e.preventDefault();
 
-      const modal = item.querySelector('.modal');
-      if (!modal) return;
+//     const item = e.currentTarget.closest('.cs-collection-item');
+//     if (!item) return;
 
-      modal.style.display = 'block';
-      requestAnimationFrame(() => {
-        modal.style.opacity = '1';
-      });
+//     const modal = item.querySelector('.modal');
+//     if (!modal) return;
 
-      lockScroll();
-    });
+//     // ===== 디버그 로그 =====
+//     console.log(
+//       'clicked:',
+//       item.querySelector('.cs-card-title')?.textContent
+//     );
+
+//     console.log('modal element:', modal);
+
+//     const h2 = modal.querySelector('h2');
+//     console.log(
+//       'modal h2:',
+//       h2 ? h2.textContent : 'h2 없음'
+//     );
+//     // =====================
+
+//     // 기존 열린 모달 모두 닫기
+//     document.querySelectorAll('.modal').forEach(m => {
+//       m.style.display = 'none';
+//       m.style.opacity = '0';
+//     });
+
+//     // 현재 모달 열기
+//     modal.style.display = 'block';
+
+//     requestAnimationFrame(() => {
+//       modal.style.opacity = '1';
+//     });
+
+//     lockScroll();
+
+//   });
+// });
+  
+
+document.addEventListener("click", e => {
+
+  console.log("TARGET :", e.target);
+
+console.log(
+  "ELEMENT FROM POINT :",
+  document.elementFromPoint(e.clientX, e.clientY)
+);
+
+console.log(
+  "LINK FROM POINT :",
+  document.elementFromPoint(e.clientX, e.clientY)?.closest(".lnk-modal")
+);
+
+  const link = e.target.closest(".lnk-modal");
+  if (!link) return;
+
+  e.preventDefault();
+
+  const item = link.closest(".cs-collection-item");
+  if (!item) return;
+
+  console.log("========== CLICK ==========");
+  console.log("ITEM :", item);
+  console.log(
+    "ITEM TITLE :",
+    item.querySelector(".cs-card-title")?.textContent
+  );
+
+  console.log(
+    "MODAL COUNT :",
+    item.querySelectorAll(".modal").length
+  );
+
+  const modal = item.querySelector(".modal");
+
+  console.log("MODAL :", modal);
+  console.log(
+    "MODAL TITLE :",
+    modal?.querySelector("h2")?.textContent
+  );
+
+  console.log(
+    "PARENT SAME :",
+    modal?.parentElement === item
+  );
+
+  if (!modal) return;
+
+  document.querySelectorAll(".modal").forEach(m => {
+    m.style.display = "none";
+    m.style.opacity = "0";
   });
 
-  /* ======================
+  modal.style.display = "block";
+
+  requestAnimationFrame(() => {
+    modal.style.opacity = "1";
+  });
+
+  lockScroll();
+
+});
+/* ======================
      MODAL CLOSE
   ====================== */
 
@@ -186,5 +286,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 200);
     });
   });
-
 });

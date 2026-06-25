@@ -742,12 +742,20 @@ textarea.w-input, textarea.w-select {
   .modal__card {
     max-height: calc(100dvh - 2rem);
     border-radius: 1rem;
+    overflow: hidden;
   }
   .modal__btn-close {
     width: 2rem!important;
     height: 2rem!important;
     top: 2rem!important;
     right: 2rem!important;
+  }
+
+  .cs-collection-item.w-dyn-item {
+    width: 100%!important;
+  }
+  .heading-style-h2.is-white {
+    font-size: 2rem!important;
   }
 }
 
@@ -3655,9 +3663,9 @@ p {
   user-select: none;
 }
 
-.cs-collection-list.is-dragging {
+/* .cs-collection-list.is-dragging {
   cursor: grabbing;
-}
+} */
 
 .img-cs-card {
   display: block;
@@ -3665,9 +3673,9 @@ p {
   -webkit-user-drag: none;
   pointer-events: auto;
 }
-.cs-collection-list.is-dragging .img-cs-card {
+/* .cs-collection-list.is-dragging .img-cs-card {
   pointer-events: none;
-}
+} */
 .modal {
   position: fixed;
   inset: 0;
@@ -4670,6 +4678,7 @@ p {
   background: #000;
   color: #fff;
   line-height: 60%;
+  font-size: 1rem;
 }
 
 ._w-cs-heading {
@@ -5435,9 +5444,9 @@ p {
     -webkit-overflow-scrolling: touch;
   }
 
-  .cs-collection-list {
+  /* .cs-collection-list {
     touch-action: pan-x;
-  }
+  } */
   .w-nav[data-collapse="small"] .w-nav-menu {
     display: none;
   }
