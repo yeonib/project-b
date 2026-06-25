@@ -740,9 +740,13 @@ textarea.w-input, textarea.w-select {
   }
 
   .modal__card {
-    max-height: calc(100dvh - 2rem);
+    max-height: calc(100vh - 40vw)!important;
     border-radius: 1rem;
     overflow: hidden;
+    border-radius: 3.9vw!important;
+  }
+  .modal__content {
+    padding: 3.9vw!important;
   }
   .modal__btn-close {
     width: 2rem!important;
