@@ -130,16 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
     touchStartY = t.clientY;
   }, { passive: true });
 
-  slider.addEventListener('touchmove', e => {
-    const t = e.touches[0];
-    const diffX = Math.abs(t.clientX - touchStartX);
-    const diffY = Math.abs(t.clientY - touchStartY);
+  // slider.addEventListener('touchmove', e => {
+  //   const t = e.touches[0];
+  //   const diffX = Math.abs(t.clientX - touchStartX);
+  //   const diffY = Math.abs(t.clientY - touchStartY);
 
-    if (diffX > diffY && diffX > 6) {
-      e.preventDefault(); // 가로 제스처일 때만 슬라이더가 제어
-    }
-    // 세로 제스처는 그대로 페이지 스크롤
-  }, { passive: false });
+  //   if (diffX > diffY && diffX > 6) {
+  //     e.preventDefault(); 
+  //   }
+  // }, { passive: false });
 
   /* ======================
      MODAL OPEN

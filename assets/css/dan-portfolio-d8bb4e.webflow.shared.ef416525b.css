@@ -744,10 +744,10 @@ textarea.w-input, textarea.w-select {
     border-radius: 1rem;
   }
   .modal__btn-close {
-    width: 3rem;
-    height: 3rem;
-    top: 1rem;
-    right: 1rem;
+    width: 2rem!important;
+    height: 2rem!important;
+    top: 2rem!important;
+    right: 2rem!important;
   }
 }
 
